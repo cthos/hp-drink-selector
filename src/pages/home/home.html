@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Drink Sorting Hat
+    </ion-title>
+    <ion-buttons end>
+      <button ion-button item-right (click)="viewResults()">View Results</button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list *ngIf="!selectorImage" radio-group [(ngModel)]="selectedDrink">
+    <ion-item *ngFor="let drink of drinkList" (click)="selectDrink()">
+      <ion-label>{{drink}}</ion-label>
+      <ion-radio value="{{drink}}"></ion-radio>
+    </ion-item>
+  </ion-list>
+
+  <button ion-button *ngIf="selectedDrink && !selectorImage" (click)="selectDrink()">
+    Choose Beverage!
+  </button>
+
+  <div class="image" *ngIf="selectorImage">
+    <h3>{{selectedDrink}}</h3>
+    <img src="{{selectorImage}}" style="height: 200px; width: 200px; display:block" alt="">
+
+    <button ion-button (click)="cancel()">Cancel</button>
+    <button ion-button (click)="saveSelection()">Confirm!</button>
+  </div>
+</ion-content>
